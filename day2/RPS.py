@@ -14,10 +14,9 @@ def count(file):
         "P": 2,
         "S": 3
     }
+    count = 0
 
-    strategy = []
     with open(file) as f:
-        count = 0
         while True:
             line = f.readline().strip()
             if not line:
@@ -34,11 +33,55 @@ def count(file):
     return count
 
 
+def count_p2(file):
+    opponent = {
+        "A": "R",
+        "B": "P",
+        "C": "S"
+    }
+    points = {
+        "R": 1,
+        "P": 2,
+        "S": 3
+    }
+    count = 0
+
+    with open(file) as f:
+        while True:
+            line = f.readline().strip()
+            if not line:
+                break
+            opp, strat = line.split(" ")
+            if strat == 'Y': #draw
+                count += 3
+                self = opponent[opp]
+            elif strat == 'X': #lose
+                if opponent[opp] == 'R':
+                    self = 'S'
+                elif opponent[opp] == 'P':
+                    self = 'R'
+                elif opponent[opp] == 'S':
+                    self = 'P'
+            elif strat == 'Z': #win
+                count += 6
+                if opponent[opp] == 'R':
+                    self = 'P'
+                elif opponent[opp] == 'P':
+                    self = 'S'
+                elif opponent[opp] == 'S':
+                    self = 'R'
+
+            count += points[self]
+
+    return count
+
+
 def main():
     print("the answer is ")
     print(count("data/test_data"))
     print(count("data/real_data"))
-
+    print(count_p2("data/test_data"))
+    print(count_p2("data/real_data"))
 
 
 if __name__ == "__main__":
