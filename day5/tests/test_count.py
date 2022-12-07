@@ -6,4 +6,4 @@ def test_part1():
 
 
 def test_part2():
-    assert restack("day5/data/test_data", True) == "MCD"
+    assert restack("day5/data/test_data", False) == "MCD"
