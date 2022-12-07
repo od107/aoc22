@@ -2,8 +2,8 @@ from day5.stacks import *
 
 
 def test_part1():
-    assert part1("day5/data/test_data") == "CMZ"
+    assert restack("day5/data/test_data", True) == "CMZ"
 
 
-# def test_part2():
-#     assert part2("day5/data/test_data") == 4
+def test_part2():
+    assert restack("day5/data/test_data", True) == "MCD"

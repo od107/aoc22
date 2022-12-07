@@ -1,7 +1,7 @@
 from collections import deque
 
 
-def part1(file):
+def restack(file, part1):
     ops = False
     init = []
     with open(file) as f:
@@ -20,8 +20,15 @@ def part1(file):
                 start = int(line[12:14].strip()) - 1
                 dest = int(line.strip()[-1]) - 1
 
-                for _ in range(moves):
-                    stacks[dest].append(stacks[start].pop())
+                if part1:
+                    for _ in range(moves):
+                        stacks[dest].append(stacks[start].pop())
+                else:
+                    list = []
+                    for i in range(moves):
+                        list.append(stacks[start].pop())
+
+                    stacks[dest].extend(reversed(list))
 
     solution = ''
     for stack in stacks:
@@ -45,10 +52,10 @@ def initialize(init):
 
 def main():
     print("the answer is ")
-    print(part1("data/test_data"))
-    print(part1("data/real_data"))
-    # print(part2("data/test_data"))
-    # print(part2("data/real_data"))
+    print(restack("data/test_data", True))
+    print(restack("data/real_data", True))
+    print(restack("data/test_data", False))
+    print(restack("data/real_data", False))
 
 
 if __name__ == "__main__":
